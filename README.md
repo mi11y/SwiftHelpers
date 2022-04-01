@@ -1,3 +1,3 @@
-# MockUp
+# SwiftHelpers
 
-A description of this package.
+Helper Libraries for Swift Projects.
