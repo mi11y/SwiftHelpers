@@ -16,7 +16,7 @@ public class MockConfiguration {
     private var testError: TestAPIError?
     private var apiURL: URLComponents?
     
-    init() {
+    public init() {
         self.statusCode = 200
     }
     
