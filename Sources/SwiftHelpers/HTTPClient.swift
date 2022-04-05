@@ -9,8 +9,13 @@ import Alamofire
 import SwiftyJSON
 import Foundation
 
+open class EncodableHTTPQueryParameters: Encodable {
+    public init() { }
+}
+
 open class HTTPClient: AlamofireJSONClient {
     
+    public var queryParameters: EncodableHTTPQueryParameters
     public var sessionManager: Session
     var serviceLocatorConfi: URLComponents
     public var onSuccess: ((JSON?) -> Void)?
@@ -20,8 +25,13 @@ open class HTTPClient: AlamofireJSONClient {
         sessionManager session: Alamofire.Session,
         serviceLocatorURL config: URLComponents
     ) {
+        self.queryParameters = EncodableHTTPQueryParameters()
         self.sessionManager = session
         self.serviceLocatorConfi = config
+    }
+    
+    public func setQueryParameters(_ params: EncodableHTTPQueryParameters) {
+        self.queryParameters = params
     }
 
     public func fetch() {
@@ -29,7 +39,7 @@ open class HTTPClient: AlamofireJSONClient {
         guard let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
         guard let url = URL(string: encoded) else { return }
         
-        sessionManager.request(url).responseString { response in
+        sessionManager.request(url, parameters: queryParameters).responseString { response in
             self.handleResponse(response)
         }
     }
