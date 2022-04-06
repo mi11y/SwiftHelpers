@@ -15,6 +15,7 @@ public class MockConfiguration {
     private var payload: Data?
     private var testError: TestAPIError?
     private var apiURL: URLComponents?
+    public var ignoreQuery: Bool = false
     
     public init() {
         self.statusCode = 200
@@ -58,7 +59,7 @@ public class MockConfiguration {
         if let error = self.testError, let payload = self.payload {
             Mock(
                 url: apiEndpoint,
-                ignoreQuery: false,
+                ignoreQuery: ignoreQuery,
                 dataType: .json,
                 statusCode: self.statusCode,
                 data: [
@@ -69,7 +70,7 @@ public class MockConfiguration {
         } else if let payload = self.payload {
             Mock(
                 url: apiEndpoint,
-                ignoreQuery: false,
+                ignoreQuery: ignoreQuery,
                 dataType: .json,
                 statusCode: self.statusCode,
                 data: [

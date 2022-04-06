@@ -15,22 +15,23 @@ open class EncodableHTTPQueryParameters: Encodable {
 
 open class HTTPClient: AlamofireJSONClient {
     
-    public var queryParameters: EncodableHTTPQueryParameters
     public var sessionManager: Session
     var serviceLocatorConfi: URLComponents
     public var onSuccess: ((JSON?) -> Void)?
     public var onFailure: ((Int?, String?) -> Void)?
+    public var queryParameters: [String : String]
+
 
     public init(
         sessionManager session: Alamofire.Session,
         serviceLocatorURL config: URLComponents
     ) {
-        self.queryParameters = EncodableHTTPQueryParameters()
+        self.queryParameters = ["" : ""]
         self.sessionManager = session
         self.serviceLocatorConfi = config
     }
     
-    public func setQueryParameters(_ params: EncodableHTTPQueryParameters) {
+    public func setQueryParameters(_ params: [String : String]) {
         self.queryParameters = params
     }
 
