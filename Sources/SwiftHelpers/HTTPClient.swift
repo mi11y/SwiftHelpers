@@ -32,6 +32,9 @@ open class HTTPClient: AlamofireJSONClient {
     
     /// Query parameters are URL encoded onto the end of the API URL. For example, `["foo": "bar"]` will be encoded into `https://httpbin.org/get?foo=bar`.
     public var queryParameters: [String : String]
+    
+    /// `HTTPHEaders` are Alamofire HTTP Headers to be used for this request.
+    public var headers: HTTPHeaders
 
 
     /// Creates a new instance of an HTTPClient.
@@ -44,7 +47,8 @@ open class HTTPClient: AlamofireJSONClient {
         sessionManager session: Alamofire.Session,
         serviceLocatorURL config: URLComponents
     ) {
-        self.queryParameters = ["" : ""]
+        self.queryParameters = ["":""]
+        self.headers = ["":""]
         self.sessionManager = session
         self.serviceLocatorConfi = config
     }
@@ -58,6 +62,15 @@ open class HTTPClient: AlamofireJSONClient {
     public func setQueryParameters(_ params: [String : String]) {
         self.queryParameters = params
     }
+    
+    /// Sets the HTTP headers to be used for this request.
+    ///
+    /// Provide an Alamofire HTTPHeaders instance to be used for this request.
+    /// - Parameters:
+    ///     = headers: An Alamofire HTTPHeaders instance (usually a dictionary of key value pairs)
+    public func setHTTPHeaders(_ headers: HTTPHeaders) {
+        self.headers = headers
+    }
 
     /// Performs the HTTP GET request.
     ///
@@ -67,7 +80,8 @@ open class HTTPClient: AlamofireJSONClient {
         guard let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
         guard let url = URL(string: encoded) else { return }
         
-        sessionManager.request(url, parameters: queryParameters).responseString { response in
+        //TODO: If there are no queryParameters present, they should not be passed in, so we wouldn't have to ignoreParams in MockConfiguration.
+        sessionManager.request(url, parameters: queryParameters, headers: self.headers).responseString { response in
             self.handleResponse(response)
         }
     }

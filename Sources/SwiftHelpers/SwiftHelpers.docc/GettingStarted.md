@@ -47,6 +47,13 @@ We can representing these query parameters like this:
 let queryParameters = ["foo":"bar"]
 ```
 
+## Creating HTTP Headers
+
+The client accepts HTTP Headers of type `HTTPHeaders` from Alamofire. These are esentially a dictionary of string key-value pairs. For example:
+```swift
+let headers: HTTPHeaders = ["x-api-key": "potato"]
+```
+
 ## Creating the HTTP Client
 
 Now we are ready to set up an instance of the `HTTPClient`. We will need to import `Alamofire` and `SwiftyJSON` packages as well. With these packages imported, we can create an instance of the client, and pass in an instance of an `Alamofire.Session` and our `urlComponents` as parameters.
@@ -65,6 +72,11 @@ Next, we can call the client's `setQueryParameters(_:[String:String])` method to
 
 ```swift
 httpClient.setQueryParameters(queryParameters)
+```
+
+We can also provide `HTTPHeaders` for this request by using `setHTTPHeaders(_:HTTPHeaders)`.
+```swift
+httpClient.setHTTPHeaders(headers)
 ```
 
 Then, we can define our `onSuccess` and `onFailure` closures that will handle their respective situations. In the success closure, the results of the request are already parsed by `SwiftyJSON`.
@@ -95,12 +107,16 @@ urlComponents.path     = "/api/people/1"
 
 let queryParameters = ["foo":"bar"]
 
+let headers: HTTPHeaders = ["x-api-key": "potato"]
+
 let httpClient = HTTPClient(
                      sessionManager: Alamofire.Session(),
                      serviceLocatorURL: urlComponents
                  )
 
 httpClient.setQueryParameters(queryParameters)
+
+httpClient.setHTTPHeaders(headers)
 
 httpClient.onSuccess = { (actualResponse: JSON?) -> Void in
     debugPrint(actualResponse!)
