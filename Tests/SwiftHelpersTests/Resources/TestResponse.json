@@ -1,0 +1,19 @@
+{
+    "data": {
+        "bikes": [
+            {
+                "type": "electric_bike",
+                "lat": 45.5718355,
+                "is_disabled": 0,
+                "bike_id": "d75631ae3c0a80203a892c35c780e233",
+                "is_reserved": 0,
+                "name": "d75631ae3c0a80203a892c35c780e233",
+                "rental_uris": {
+                    "ios": "https://pdx.lft.to/lastmile_qr_scan",
+                    "android": "https://pdx.lft.to/lastmile_qr_scan"
+                },
+                "lon": -122.64238466666667
+            }
+        ]
+    }
+}
