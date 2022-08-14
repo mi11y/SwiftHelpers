@@ -5,9 +5,9 @@
         "package": "Alamofire",
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
-          "branch": null,
-          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
-          "version": "5.5.0"
+          "branch": "master",
+          "revision": "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
+          "version": null
         }
       },
       {
@@ -15,17 +15,17 @@
         "repositoryURL": "https://github.com/WeTransfer/Mocker.git",
         "state": {
           "branch": null,
-          "revision": "077c52a31f5ebb649ebe546cc77d8647760b2279",
-          "version": "2.5.5"
+          "revision": "e7165fb0378193c6784f1d46a9ab2b6184c384fa",
+          "version": "2.7.0"
         }
       },
       {
         "package": "SwiftyJSON",
         "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
         "state": {
-          "branch": null,
-          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
-          "version": "4.3.0"
+          "branch": "master",
+          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
+          "version": null
         }
       }
     ]
